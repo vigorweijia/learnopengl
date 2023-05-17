@@ -22,6 +22,8 @@ extern void hello_camera_obj();
 
 extern void lighting_color();
 
+extern void lighting_phong();
+
 int main() {
-	lighting_color();
+	lighting_phong();
 }
