@@ -16,6 +16,8 @@ extern void hello_coordinate();
 extern void hello_coordinate_cube();
 extern void hello_coordinate_multicube();
 
+extern void hello_camera();
+
 int main() {
-	hello_coordinate_multicube();
+	hello_camera();
 }
