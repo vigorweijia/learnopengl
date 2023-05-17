@@ -596,10 +596,8 @@ void hello_coordinate_multicube() {
 		glm::mat4 projection(1.0f);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f)); // z±‰–°£¨‘∂¿Î≥°æ∞
 		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-		unsigned int viewLoc = glGetUniformLocation(shaderManager.ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-		unsigned int projectionLoc = glGetUniformLocation(shaderManager.ID, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		shaderManager.setMat4("view", view);
+		shaderManager.setMat4("projection", projection);
 
 		/*------- draw each cube -------*/
 		glBindVertexArray(VAO);
