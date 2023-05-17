@@ -1,0 +1,5 @@
+*
+!src/*
+!thirdparty/*
+!CMakeLists.txt
+!.gitignore
