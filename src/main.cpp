@@ -20,6 +20,8 @@ extern void hello_camera();
 extern void hello_camera_move();
 extern void hello_camera_obj();
 
+extern void lighting_color();
+
 int main() {
-	hello_camera_obj();
+	lighting_color();
 }
