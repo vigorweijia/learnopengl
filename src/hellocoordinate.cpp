@@ -615,7 +615,7 @@ void hello_coordinate_multicube() {
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		}
 
-		/*----- double buffer ------*/
+		/*----- double buffer ------*/ 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
