@@ -110,7 +110,12 @@ void lighting_phong() {
 
 	/*-------------  use shader manager  ----------------*/
 	// working directory is under "build"
+	// Phong Shader
 	ShaderManager cubeColorShader("../src/shaders/lightingphongshader/cubeVS.glsl", "../src/shaders/lightingphongshader/cubeFS.glsl");
+	// Gouraud Shader
+	// ShaderManager cubeColorShader("../src/shaders/lightingphongshader/gouraudVS.glsl", "../src/shaders/lightingphongshader/gouraudFS.glsl");
+	// Viewspace Lighting Shader
+	// ShaderManager cubeColorShader("../src/shaders/lightingphongshader/viewspaceVS.glsl", "../src/shaders/lightingphongshader/viewspaceFS.glsl");
 	ShaderManager lightSourceShader("../src/shaders/lightingphongshader/lightsourceVS.glsl", "../src/shaders/lightingphongshader/lightsourceFS.glsl");
 
 	/*--------- set vertex data and attributes -----------*/
@@ -197,6 +202,11 @@ void lighting_phong() {
 		lightSourceShader.setMat4("projection", projection);
 		lightSourceShader.setMat4("view", view);
 		glm::mat4 model(1.0f);
+		/* rotate light source
+			lightSourcePos.x = 3.0f * cos(glfwGetTime());
+			lightSourcePos.z = 3.0f * sin(glfwGetTime());
+			lightSourcePos.y = 1.0f + sin(glfwGetTime() / 2.0f);
+		*/	
 		model = glm::translate(model, lightSourcePos);
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		lightSourceShader.setMat4("model", model);
