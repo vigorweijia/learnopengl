@@ -24,6 +24,8 @@ extern void lighting_color();
 
 extern void lighting_phong();
 
+extern void lighting_material();
+
 int main() {
-	lighting_phong();
+	lighting_material();
 }
