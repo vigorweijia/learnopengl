@@ -28,6 +28,8 @@ extern void lighting_material();
 
 extern void lighting_map();
 
+extern void lighting_lightsource();
+
 int main() {
-	lighting_map();
+	lighting_lightsource();
 }
