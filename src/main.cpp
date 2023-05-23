@@ -30,6 +30,8 @@ extern void lighting_map();
 
 extern void lighting_lightsource();
 
+extern void lighting_multilightsource();
+
 int main() {
-	lighting_lightsource();
+	lighting_multilightsource();
 }
