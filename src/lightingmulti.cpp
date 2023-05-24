@@ -216,12 +216,12 @@ void lighting_multilightsource() {
 		glm::mat4 view = camera.GetViewMatrix();
 
 		/*------- light color ------*/
-		glm::vec3 lightColor(1.0f);
+		glm::vec3 lightColor(0.2f);
 		glm::vec3 diffuseColor = lightColor * 0.4f;
 		glm::vec3 ambientColor = lightColor * 0.05f;
 		float constance = 1.0f;
-		float linear = 0.09f;
-		float quadratic = 0.0032f;
+		float linear = 0.14f;
+		float quadratic = 0.07f;
 
 		/*----- light source -------*/
 		lightSourceShader.use();
@@ -238,7 +238,6 @@ void lighting_multilightsource() {
 		}
 
 		/*------ cube object -------*/
-		glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
 		materialShader.use();
 		// Directional Light
 		materialShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
@@ -285,9 +284,9 @@ void lighting_multilightsource() {
 		materialShader.setFloat("spotLight.constance", 1.0f);
 		materialShader.setFloat("spotLight.linear", 0.09f);
 		materialShader.setFloat("spotLight.quadratic", 0.0032f);
-		materialShader.setVec3("spotLight.ambient", ambientColor);
-		materialShader.setVec3("spotLight.diffuse", diffuseColor);
-		materialShader.setVec3("spotLight.specular", lightColor);
+		materialShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+		materialShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
+		materialShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
 
 		materialShader.setVec3("viewPos", camera.Position);
 		materialShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);

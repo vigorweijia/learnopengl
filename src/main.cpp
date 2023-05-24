@@ -32,6 +32,8 @@ extern void lighting_lightsource();
 
 extern void lighting_multilightsource();
 
+extern void modelloading_mesh();
+
 int main() {
-	lighting_multilightsource();
+	modelloading_mesh();
 }
