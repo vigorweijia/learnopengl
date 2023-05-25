@@ -34,6 +34,8 @@ extern void lighting_multilightsource();
 
 extern void modelloading_mesh();
 
+extern void advancedGL_stencil();
+
 int main() {
-	modelloading_mesh();
+	advancedGL_stencil();
 }
