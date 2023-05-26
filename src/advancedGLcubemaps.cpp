@@ -111,11 +111,13 @@ void advancedGL_cubemaps() {
 
 	/*-------------  use shader manager  ----------------*/
 	ShaderManager shader("../src/shaders/advancedGLcubemaps/cubemapsVS.glsl", "../src/shaders/advancedGLcubemaps/cubemapsFS.glsl");
-	ShaderManager modelShader("../src/shaders/advancedGLcubemaps/modelloadingVS.glsl", "../src/shaders/advancedGLcubemaps/modelloadingFS.glsl");
+	// ShaderManager modelShader("../src/shaders/advancedGLcubemaps/modelloadingVS.glsl", "../src/shaders/advancedGLcubemaps/modelloadingFS.glsl");
+	// ShaderManager modelShader("../src/shaders/advancedGLcubemaps/modelReflectionVS.glsl", "../src/shaders/advancedGLcubemaps/modelReflectionFS.glsl");
+	ShaderManager modelShader("../src/shaders/advancedGLcubemaps/modelReflectionVS.glsl", "../src/shaders/advancedGLcubemaps/modelRefractionFS.glsl");
 	ShaderManager skyboxShader("../src/shaders/advancedGLcubemaps/skyboxVS.glsl", "../src/shaders/advancedGLcubemaps/skyboxFS.glsl");
 
 	/*---------------  load models  ---------------------*/
-	Model ourModel("../resources/nanosuit/nanosuit.obj");
+	Model ourModel("../resources/shenlilinghua/linghua.fbx");
 
 	/*--------- set vertex data and attributes -----------*/
 	float cubeVertices[] = {
@@ -264,8 +266,7 @@ void advancedGL_cubemaps() {
 	shader.setInt("texture1", 0);
 	skyboxShader.use();
 	skyboxShader.setInt("skybox", 0);
-	modelShader.use();
-	modelShader.setInt("texture_diffuse1", 0);
+
 
 	/*---------------  render loop  ---------------------*/
 	while (!glfwWindowShouldClose(window)) {
@@ -301,10 +302,17 @@ void advancedGL_cubemaps() {
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 		// models
+		modelShader.use();
+		modelShader.setMat4("view", view);
+		modelShader.setMat4("projection", projection);
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		modelShader.setMat4("model", model);
+		modelShader.setVec3("cameraPos", camera.Position);
+		modelShader.setInt("skybox", 1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		ourModel.Draw(modelShader);
 
 		// draw skybox as last
