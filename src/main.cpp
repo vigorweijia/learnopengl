@@ -40,6 +40,8 @@ extern void advancedGL_blend();
 
 extern void advancedGL_faceculling();
 
+extern void advancedGL_framebuffer();
+
 int main() {
-	advancedGL_faceculling();
+	advancedGL_framebuffer();
 }
