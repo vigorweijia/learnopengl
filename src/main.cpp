@@ -36,6 +36,8 @@ extern void modelloading_mesh();
 
 extern void advancedGL_stencil();
 
+extern void advancedGL_blend();
+
 int main() {
-	advancedGL_stencil();
+	advancedGL_blend();
 }
