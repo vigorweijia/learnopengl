@@ -42,6 +42,8 @@ extern void advancedGL_faceculling();
 
 extern void advancedGL_framebuffer();
 
+extern void advancedGL_cubemaps();
+
 int main() {
-	advancedGL_framebuffer();
+	advancedGL_cubemaps();
 }
