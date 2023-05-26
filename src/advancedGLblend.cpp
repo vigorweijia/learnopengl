@@ -256,10 +256,19 @@ void advancedGL_blend() {
 		glm::mat4 view = camera.GetViewMatrix();
 
 		/*------ draw objects -------*/
+		// model object, this model will be occluded by transparent texture if rendered after it
+		modelShader.use();
+		modelShader.setMat4("projection", projection);
+		modelShader.setMat4("view", view);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+		modelShader.setMat4("model", model);
+		ourModel.Draw(modelShader);
+		// cube objects
 		shader.use();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
-		// cube objects
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
@@ -276,10 +285,11 @@ void advancedGL_blend() {
 		model = glm::mat4(1.0f);
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		// vegetation
+		// transparent objects
 		glBindVertexArray(transparentVAO);
 		glBindTexture(GL_TEXTURE_2D, transparentTexture);
 		std::map<float, glm::vec3> sorted;
+		// sort transparent objects
 		for (auto& location : vegetation)
 		{
 			float distance = glm::length(camera.Position - location);
@@ -292,15 +302,6 @@ void advancedGL_blend() {
 			shader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
-		// model object
-		modelShader.use();
-		modelShader.setMat4("projection", projection);
-		modelShader.setMat4("view", view);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		modelShader.setMat4("model", model);
-		ourModel.Draw(modelShader);
 
 		/*----- double buffer ------*/
 		glfwSwapBuffers(window);
