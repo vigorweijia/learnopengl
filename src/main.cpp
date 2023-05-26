@@ -38,6 +38,8 @@ extern void advancedGL_stencil();
 
 extern void advancedGL_blend();
 
+extern void advancedGL_faceculling();
+
 int main() {
-	advancedGL_blend();
+	advancedGL_faceculling();
 }
