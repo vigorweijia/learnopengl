@@ -12,6 +12,7 @@
 #include "utils.h"
 #include "ShaderManager.h"
 #include "Camera.h"
+#include "model.h"
 
 using namespace std;
 
@@ -108,8 +109,16 @@ void advancedGL_blend() {
 	/*--------------  enable z-buffer  ------------------*/
 	glEnable(GL_DEPTH_TEST);
 
+	/*--------------  enable blend  ---------------------*/
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	/*-------------  use shader manager  ----------------*/
 	ShaderManager shader("../src/shaders/advancedGLblend/blendVS.glsl", "../src/shaders/advancedGLblend/blendFS.glsl");
+	ShaderManager modelShader("../src/shaders/advancedGLblend/modelloadingVS.glsl", "../src/shaders/advancedGLblend/modelloadingFS.glsl");
+	
+	/*------------------- load models -------------------*/
+	Model ourModel("../resources/shenlilinghua/linghua.fbx");
 
 	/*--------- set vertex data and attributes -----------*/
 	float cubeVertices[] = {
@@ -214,7 +223,8 @@ void advancedGL_blend() {
 	/*-----------  load texture map  --------------------*/
 	unsigned int cubeTexture = loadTexture("../resources/common/textures/marble.jpg");
 	unsigned int floorTexture = loadTexture("../resources/common/textures/metal.png");
-	unsigned int grassTexture = loadTexture("../resources/common/textures/grass.png");
+	// unsigned int transparentTexture = loadTexture("../resources/common/textures/grass.png");
+	unsigned int transparentTexture = loadTexture("../resources/common/textures/blending_transparent_window.png");
 
 	// vegetation location
 	vector<glm::vec3> vegetation
@@ -268,13 +278,29 @@ void advancedGL_blend() {
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		// vegetation
 		glBindVertexArray(transparentVAO);
-		glBindTexture(GL_TEXTURE_2D, grassTexture);
-		for (auto& location : vegetation) {
-			model = glm::mat4(1.0f);
-			model = glm::translate(model, location);
-			shader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindTexture(GL_TEXTURE_2D, transparentTexture);
+		std::map<float, glm::vec3> sorted;
+		for (auto& location : vegetation)
+		{
+			float distance = glm::length(camera.Position - location);
+			sorted[distance] = location;
 		}
+		for (std::map<float, glm::vec3>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it)
+		{
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, it->second);
+			shader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		}
+		// model object
+		modelShader.use();
+		modelShader.setMat4("projection", projection);
+		modelShader.setMat4("view", view);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+		modelShader.setMat4("model", model);
+		ourModel.Draw(modelShader);
 
 		/*----- double buffer ------*/
 		glfwSwapBuffers(window);
