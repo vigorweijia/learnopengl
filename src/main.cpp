@@ -44,6 +44,8 @@ extern void advancedGL_framebuffer();
 
 extern void advancedGL_cubemaps();
 
+extern void advancedGL_ubo();
+
 int main() {
-	advancedGL_cubemaps();
+	advancedGL_ubo();
 }
