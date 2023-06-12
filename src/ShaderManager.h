@@ -15,7 +15,7 @@ class ShaderManager
 public:
     // Program ID
     unsigned int ID;
-    ShaderManager(const char* vertexPath, const char* fragmentPath);
+    ShaderManager(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
     ~ShaderManager();
     // Activate Shader program
     void use();

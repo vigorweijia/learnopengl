@@ -46,6 +46,8 @@ extern void advancedGL_cubemaps();
 
 extern void advancedGL_ubo();
 
+extern void advancedGL_geometry();
+
 int main() {
-	advancedGL_ubo();
+	advancedGL_geometry();
 }

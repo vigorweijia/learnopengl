@@ -189,6 +189,7 @@ void advancedGL_ubo() {
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	// define the range of the buffer that links to a uniform binding point
 	glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(glm::mat4));
+	// glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboMatrices); // the same as above
 
 	// store the projection matrix (we only do this once now) (note: we're not using zoom anymore by changing the FoV)
 	glm::mat4 projection = glm::perspective(45.0f, (float)800 / (float)600, 0.1f, 100.0f);
