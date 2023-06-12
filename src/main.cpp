@@ -48,7 +48,8 @@ extern void advancedGL_ubo();
 
 extern void advancedGL_geometry();
 extern void advancedGL_geometry_explode();
+extern void advancedGL_geometry_normal();
 
 int main() {
-	advancedGL_geometry_explode();
+	advancedGL_geometry_normal();
 }
