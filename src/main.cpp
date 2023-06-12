@@ -47,7 +47,8 @@ extern void advancedGL_cubemaps();
 extern void advancedGL_ubo();
 
 extern void advancedGL_geometry();
+extern void advancedGL_geometry_explode();
 
 int main() {
-	advancedGL_geometry();
+	advancedGL_geometry_explode();
 }

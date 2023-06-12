@@ -157,3 +157,79 @@ void advancedGL_geometry() {
 	glfwTerminate();
 	exit(0);
 }
+
+void advancedGL_geometry_explode() {
+	/*-------------  glfw initialization   --------------*/
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif 
+
+	/*--------------  create window  --------------------*/
+	GLFWwindow* window = glfwCreateWindow(800, 600, "learnopengl", NULL, NULL);
+	if (window == nullptr) {
+		cout << "Failed to create window." << endl;
+		glfwTerminate();
+		exit(-1);
+	}
+	glfwMakeContextCurrent(window);
+
+	/*-------- glad manager of opengl function ptr ------*/
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		cout << "Failed to initialize GLAD." << endl;
+		exit(-1);
+	}
+
+	/*---------------  set viewport ---------------------*/
+	glViewport(0, 0, 800, 600);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	/*----------- set mouse move callback ---------------*/
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window, MouseCallBackCameraObj);
+
+	/*----------- set mouse scroll callback -------------*/
+	glfwSetScrollCallback(window, ScrollCallBackCameraObj);
+
+	/*--------------  enable z-buffer  ------------------*/
+	glEnable(GL_DEPTH_TEST);
+
+	/*-------------  use shader manager  ----------------*/
+	ShaderManager shader("../src/shaders/advancedGLgeometry/explodeVS.glsl", "../src/shaders/advancedGLgeometry/explodeFS.glsl", "../src/shaders/advancedGLgeometry/explodeGS.glsl");
+
+	/*----------------  load models  --------------------*/
+	Model nanosuit("../resources/nanosuit/nanosuit.obj");
+
+	/*---------------  render loop  ---------------------*/
+	while (!glfwWindowShouldClose(window)) {
+		/*----- process input ------*/
+		processInputCameraObj(window);
+
+		/*----- render command -----*/
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		/*------ draw models -------*/
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 model(1.0f);
+		shader.use();
+		shader.setMat4("projection", projection);
+		shader.setMat4("view", view);
+		shader.setMat4("model", model);
+		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+		nanosuit.Draw(shader);
+
+		/*----- double buffer ------*/
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	/*------------- de-allocate all resources ----------*/
+
+	glfwTerminate();
+	exit(0);
+}
