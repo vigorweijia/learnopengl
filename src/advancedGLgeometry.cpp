@@ -200,6 +200,7 @@ void advancedGL_geometry_explode() {
 	/*-------------  use shader manager  ----------------*/
 	ShaderManager shader("../src/shaders/advancedGLgeometry/explodeVS.glsl", "../src/shaders/advancedGLgeometry/explodeFS.glsl", "../src/shaders/advancedGLgeometry/explodeGS.glsl");
 
+
 	/*----------------  load models  --------------------*/
 	Model nanosuit("../resources/nanosuit/nanosuit.obj");
 
