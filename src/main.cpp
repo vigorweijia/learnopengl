@@ -51,7 +51,8 @@ extern void advancedGL_geometry_explode();
 extern void advancedGL_geometry_normal();
 
 extern void advancedGL_instancing();
+extern void advancedGL_asteroid_belt();
 
 int main() {
-	advancedGL_instancing();
+	advancedGL_asteroid_belt();
 }
