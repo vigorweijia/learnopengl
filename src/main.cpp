@@ -53,6 +53,9 @@ extern void advancedGL_geometry_normal();
 extern void advancedGL_instancing();
 extern void advancedGL_asteroid_belt();
 
+extern void advancedGL_anti_aliasing();
+extern void advancedGL_offscreen();
+
 int main() {
-	advancedGL_asteroid_belt();
+	advancedGL_offscreen();
 }
