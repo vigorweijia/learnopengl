@@ -56,6 +56,8 @@ extern void advancedGL_asteroid_belt();
 extern void advancedGL_anti_aliasing();
 extern void advancedGL_offscreen();
 
+extern void advancedLT_Blinn_Phong();
+
 int main() {
-	advancedGL_offscreen();
+	advancedLT_Blinn_Phong();
 }
