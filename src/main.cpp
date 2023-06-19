@@ -58,6 +58,8 @@ extern void advancedGL_offscreen();
 
 extern void advancedLT_Blinn_Phong();
 
+extern void advancedLT_Gamma_Correction();
+
 int main() {
-	advancedLT_Blinn_Phong();
+	advancedLT_Gamma_Correction();
 }
