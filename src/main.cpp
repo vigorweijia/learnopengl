@@ -60,6 +60,9 @@ extern void advancedLT_Blinn_Phong();
 
 extern void advancedLT_Gamma_Correction();
 
+extern void advancedLT_Shadow_Mapping_Origin();
+extern void advancedLT_Shadow_Mapping();
+
 int main() {
-	advancedLT_Gamma_Correction();
+	advancedLT_Shadow_Mapping();
 }
