@@ -63,6 +63,8 @@ extern void advancedLT_Gamma_Correction();
 extern void advancedLT_Shadow_Mapping_Origin();
 extern void advancedLT_Shadow_Mapping();
 
+extern void advancedLT_Point_Shadow();
+
 int main() {
-	advancedLT_Shadow_Mapping();
+	advancedLT_Point_Shadow();
 }
