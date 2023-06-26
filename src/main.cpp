@@ -67,6 +67,8 @@ extern void advancedLT_Point_Shadow();
 
 extern void advancedLT_Normal_Mapping();
 
+extern void advancedLT_Parallax_Mapping();
+
 int main() {
-	advancedLT_Normal_Mapping();
+	advancedLT_Parallax_Mapping();
 }
