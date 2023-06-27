@@ -69,6 +69,8 @@ extern void advancedLT_Normal_Mapping();
 
 extern void advancedLT_Parallax_Mapping();
 
+extern void advancedLT_HDR();
+
 int main() {
-	advancedLT_Parallax_Mapping();
+	advancedLT_HDR();
 }
