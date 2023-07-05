@@ -73,6 +73,8 @@ extern void advancedLT_HDR();
 
 extern void advancedLT_Bloom();
 
+extern void advancedLT_Deffered_Shading();
+
 int main() {
-	advancedLT_Bloom();
+	advancedLT_Deffered_Shading();
 }
